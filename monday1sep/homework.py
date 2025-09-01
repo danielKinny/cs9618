@@ -21,17 +21,11 @@ class Car:
     def SetCarType(self, ct):
         self.__CarType = ct
 
-    def SetCoolness(self, cool):
-        self.__IsCool = cool
-
     def SetHighestSpeed(self, speed):
         self.__HighestSpeed = speed
 
     def GetCarType(self):
         return (self.__CarType)
-    
-    def Coolness(self):
-        return (self.__IsCool)
     
     def GetHighestSpeed(self):
         return (self.__HighestSpeed)
@@ -54,13 +48,13 @@ class Car:
     def PrintDetails(self):
         print("---------")
         print("The vehicle ID is : ",self.__VehicleID)
-        print("The vehicle registration is: "+self.__Registration)
+        print("The vehicle registration is: ",self.__Registration)
         print("The date of registration is: "+self.__DateOfRegistration)
         print("The engine size of the vehicle is: ",self.__EngineSize)
         print("The purchase price of the vehicle is: ",self.__PurchasePrice)
-        
-        
-carjobs1 = [Car(str(random.randint(1000,999),random.randint(1000,3000)) for i in range(5)]
+
+
+carjobs1 = [Car(str(random.randint(1000,9999)),random.randint(1000,3000)) for i in range(5)]
 carjobs2 = []
 
 for i in range(2):
@@ -84,12 +78,12 @@ vehicleID = input("Enter vehicle ID to search for: ")
 flag = False
 
 for car in carjobs2:
-    if car.GetVehicleId() = vehicleID:
+    if car.GetVehicleID() == vehicleID:
         print("Match found")
         flag = True
         break
     
-if !flag:
+if not flag:
     print("Car with that vehicle ID not found")
     
     
