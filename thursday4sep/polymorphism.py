@@ -59,12 +59,38 @@ class Book(LibraryItem):
     def setRequested(self):
         self.__isRequested = True
         
+    def printDetails(self):
+        print("--------------------------------------------")
+        print("The name of the book is: " + self.getTitle())
+        print("The book is authored by: "+ self.getAuthor())
+        print("The book ID is: " + self.getItemID())
+        if self.getLoaned():
+            print("This book is on loan till: " + str(self.__dueDate) )
+        else:
+            print("This book is not on loan")
+        if self.getRequested():
+            print("This book is already requested")
+            print("Repeated count: ",self.__repeatedly)
+        else:
+            print("This book has not been requested")
+        
 
 class CD(LibraryItem):
 
     def __init__(self, title,author,itemID):
         LibraryItem.__init__(self,title, author, itemID)
         self.__genre = "pop"
+
+    def printDetails(self):
+        print("-------------------------------------------")
+        print("The name of the CD is: " + self.getTitle())
+        print("The CD is authored by: "+ self.getAuthor())
+        print("The CD ID is: " + self.getItemID())
+        if self.getLoaned():
+            print("This CD is on loan till: " + str(self.__dueDate) )
+        else:
+            print("This CD is not on loan")
+        print("this genre of this CD is : "+self.__genre)
 
     def setGenre(self, genre):
         self.__genre = genre
