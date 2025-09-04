@@ -30,9 +30,16 @@ class LibraryItem:
     def getItemID(self):
         return self.__itemID
     
+    def getOnLoan(self):
+        return self.__onLoan()
+    
     def borrowing(self):
-        self.__onLoan = True
-        self.__dueDate = self.__dueDate + datetime.timedelta(weeks=3)
+        if not (self.getOnLoan()):
+            self.__onLoan = True
+            self.__dueDate = self.__dueDate + datetime.timedelta(weeks=3)
+        else:
+            self.__onLoan = False
+            self.__dueDate = ""
 
     def printDetails(self):
         print("The name of the item is: " + self.getTitle())
@@ -158,15 +165,46 @@ for i in range(3):
 for item in library:
     item.printDetails()
 
-selection = input("Enter the ID of the item you want to borrow: ")
-for item in library:
-    if item.getItemID() == selection:
-        borrowers[0].updateItemsOnLoan(1)
-        item.borrowing()
-    else:
-        print("item not found")
+for i in range(len(borrowers)):
+    selection = input("Enter the ID of the item you want to borrow: ")
+    for item in library:
+        if item.getItemID() == selection:
+            borrowers[0].updateItemsOnLoan(1)
+            item.borrowing()
+            borrowers[i].printDetails()
+        else:
+            print("item not found")
 
-borrowers[0].printDetails()
-
+    
+print("This is the state of the library: ")
 for item in library:
     item.printDetails()
+
+print()
+print("This is the state of the borrowers list: ")
+for person in borrowers:
+    person.printDetails()
+
+
+
+#now we gonna let them return the item
+
+for i in range(len(borrowers)):
+    selection = input("Enter the ID of the book to return: ")
+    for item in library:
+        if item.getItemID() == selection:
+            borrowers[0].updateItemsOnLoan(-1)
+            item.borrowing()
+            borrowers[i].printDetails()
+        else:
+            print("item not found")
+
+    
+print("This is the state of the library: ")
+for item in library:
+    item.printDetails()
+
+print()
+print("This is the state of the borrowers list: ")
+for person in borrowers:
+    person.printDetails()
