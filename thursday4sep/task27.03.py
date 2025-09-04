@@ -123,16 +123,50 @@ class Borrower:
         print('The borrowed ID is: ',self.getBorrowerID())
         print("Number of items on loan are: ",self.getItemsLoaned())
 
+borrowers=[]
+library = []
 
-name = input('Enter borrower name: ')
-email = input('Enter borrower email: ')
-bID = int(input("Enter your borrowed ID: "))
-itemsOnLoan = int(input("Enter items on loan: "))
+#this initialises a list of borrowers
+for i in range(1):
+    name = input('Enter borrower name: ')
+    email = input('Enter borrower email: ')
+    bID = int(input("Enter your borrowed ID: "))
+    itemsOnLoan = int(input("Enter items on loan: "))
 
-me = Borrower(name, email, bID, itemsOnLoan)
-
-me.printDetails()
+    borrowers.append(Borrower(name, email, bID, itemsOnLoan) )
 
 
+#this initialises 5 books and 5 CDs
+for i in range(1):
+    print("-----------------------")
+    t = input('Enter book title: ')
+    a = input('Enter author: ')
+    i = input('Enter book ID: ')
+    library.append(Book(t,a,i))
 
-    
+
+for i in range(3):
+    print("--------------------")
+    t = input('Enter CD title: ')
+    a = input('Enter author: ')
+    i = input('Enter CD ID: ')
+    library.append(CD(t,a,i))
+
+
+#code that allows someone to borrow a book
+
+for item in library:
+    item.printDetails()
+
+selection = input("Enter the ID of the item you want to borrow: ")
+for item in library:
+    if item.getItemID() == selection:
+        borrowers[0].updateItemsOnLoan(1)
+        item.borrowing()
+    else:
+        print("item not found")
+
+borrowers[0].printDetails()
+
+for item in library:
+    item.printDetails()
