@@ -16,6 +16,7 @@ class Lesson:
         return self.__req
     
     def getLessonDetails(self):
+        print()
         print("The lesson's name is: "+self.getLessonTitle())
         print("The lesson's duration is: ",self.getLessonDuration())
         print(f"Does this require a lab? "+str(self.getLabRequired()))
@@ -35,6 +36,7 @@ class Assessment:
         return self.__maxMark
     
     def getAssessmentDetails(self):
+        print()
         print("The assessment name is: "+ self.getAssessmentTitle())
         print("The assessment's max mark is: ",self.getMaxMark())
     
@@ -85,6 +87,8 @@ class Course:
 course = Course("A Level Computer Science",30)
 
 course.addLesson("Python OOP Basics", 60, True)
-course.addAssessment("Python Inheritance", 75)
+course.addLesson("Recursion", 50, False)
+course.addLesson("Abstract Data Types", 70, True)
+course.addAssessment("Unit Test 1", 50)
 
 course.outputCourseDetails()
