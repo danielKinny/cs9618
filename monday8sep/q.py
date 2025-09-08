@@ -85,4 +85,6 @@ class Course:
 course = Course("A Level Computer Science",30)
 
 course.addLesson("Python OOP Basics", 60, True)
+course.addAssessment("Python Inheritance", 75)
 
+course.outputCourseDetails()
