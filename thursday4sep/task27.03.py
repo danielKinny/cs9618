@@ -144,7 +144,7 @@ for i in range(1):
 
 
 #this initialises 5 books and 5 CDs
-for i in range(1):
+for i in range(5):
     print("-----------------------")
     t = input('Enter book title: ')
     a = input('Enter author: ')
@@ -152,7 +152,7 @@ for i in range(1):
     library.append(Book(t,a,i))
 
 
-for i in range(3):
+for i in range(5):
     print("--------------------")
     t = input('Enter CD title: ')
     a = input('Enter author: ')
