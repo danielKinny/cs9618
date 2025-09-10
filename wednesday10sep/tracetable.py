@@ -11,7 +11,7 @@ def factorial(n):
         print(n," * factorial(",n-1,")")
 
     result = n*factorial(n-1)
-    print()
+    print("---------------------")
     print("this part is : ", result)
     return result
 
