@@ -1,0 +1,5 @@
+1,reading books,1 
+2,computer games,1 
+3,sports,1 
+4,programming,1 
+5,watching tv,1 
