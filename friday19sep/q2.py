@@ -27,28 +27,34 @@ def ReadData():
     ]
 
     picture = []
+    
+    try:
+        
+        with open("Pictures.txt", "r") as f:
+            counter = 0
+            for line in f:
 
-    with open("Pictures.txt", "r") as f:
-        counter = 0
-        for line in f:
+                if counter%4 == 0 and counter != 0:
+                    pictureData.append(Picture(int(picture[1]), int(picture[2]), picture[3], picture[0]))
+                    picture = []
+                picture.append(line.strip())
+                counter+=1
 
-            if counter%4 == 0 and counter != 0:
-                pictureData.append(Picture(int(picture[1]), int(picture[2]), picture[3], picture[0]))
-                picture = []
-            picture.append(line.strip())
-            counter+=1
+            pictureData.append(Picture(int(picture[1]), int(picture[2]), picture[3], picture[0]))
 
-        pictureData.append(Picture(int(picture[1]), int(picture[2]), picture[3], picture[0]))
+        return len(pictureData)
 
-    return pictureData
+    except:
 
-data = ReadData()
+        print("File path not found")
+
+print("The number of pictures are: "+ str(ReadData()))
 w = int(input("Enter width: "))
 h = int(input("Enter height: "))
 fc = input("Enter frame color: ")
 
 flag = False
-for pic in data:
+for pic in pictureData:
     if pic.getWidth() <= w and pic.getHeight() <= h and pic.getFrameColor().lower() == fc.lower():
         print("Match found! " + pic.getDescription())
         flag = not flag
@@ -56,5 +62,3 @@ for pic in data:
 if not flag:
     print("No matches found.")
     
-
-
