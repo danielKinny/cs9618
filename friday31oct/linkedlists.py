@@ -56,16 +56,45 @@ def insertNode(nodes,flp,sp,val):
         nodes[flp].ptr = nextNode #new node ptr node points to next node
         
     return(nextflp,sp,nodes)
+
+def deleteNode(nodes,flp,sp,tar):
+    nodePtr = sp
+    
+    if sp == -1:
+        print("There are no nodes to be deleted")
+        return nodes,flp,sp
+    
+    if nodes[nodePtr].data == tar:
+        nextsp = nodes[nodePtr].ptr
+        nodes[nodePtr].ptr = flp
+        flp = nodePtr
+        return nodes,flp,nextsp
+    
+    while nodes[nodePtr].data != tar and nodePtr != -1:
+        prevNode = nodePtr
+        nodePtr = nodes[nodePtr].ptr
+    if nodePtr == -1:
+        print("Node to be deleted not found")
+        return nodes,flp,sp
+    else:
+        nextNode = nodes[nodePtr].ptr
+        nodes[nodePtr].ptr = flp
+        flp = nodePtr
+        nodes[prevNode].ptr = nextNode
+    
+    return nodes,flp,sp
+        
     
 def displayMenu():
     nodes = initialiseNodes() #initialising the nodes within the main subprog to avoid closure confusions
     flp,sp=0,-1 #first flp is 0, since empty list, subsequuently sp is also gunna be -1
-    val = 3 #dummy val to enter while loop and force repeat menu display
+    val = -1 #dummy val to enter while loop and force repeat menu display
     while val != 0:
-        val = 3
+        val = -1
         print("1. Print all Nodes ")
         print("2. Insert a Node ")
-        while val > 2 or val < 0:
+        print("3. Delete a Node ")
+        while val > 3 or val < 0:
             val = int(input('Enter choice: '))
 
         if val == 1:
@@ -81,6 +110,13 @@ def displayMenu():
                     valid = ord(data) >= 65 and ord(data) <= 90 #checks whether input is caps alphabets
                 flp,sp,nodes = insertNode(nodes,flp,sp,data)
                 printNodes(nodes,flp,sp)
+        elif val == 3:
+            valid = False
+            while not valid:
+                data = input('Enter Input (A-Z): ')
+                valid = ord(data) >= 65 and ord(data) <= 90
+            nodes,flp,sp = deleteNode(nodes,flp,sp,data)
+            printNodes(nodes,flp,sp)
         else:
             print("WE OUTTA HERE")
 
