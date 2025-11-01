@@ -1,3 +1,30 @@
+"""
+
+hello
+you are either me or some1 from class
+if you are me, hello goat.
+if you are someone else, ew
+im putting this so its easy for me to understand the logic behind everything
+
+initialising : 
+>make arr of 8 nodes 
+> last node has null ptr
+
+inserting : 
+> check if sp null (empty list) 
+> check if node TBI is smallest ( set sp to flp > flp to next free node > set newly added node's ptr to nodePtr (already at first node) )
+> traverse list to find a position where next node is greater than node TBI or the end of the list is reached 
+> check if it is the end of the list ( set node at nodePtr to point to flp > temp var to store next flp > set newly added node's ptr to -1 )
+> else a position is found ( set node at nodePtr to point to flp > temp var to store next flp > set new node's ptr to nextNode )
+
+deleting :
+> check if sp null (empty list)
+> check if first node is target node ( temp var to new sp which is the ptr of first node > set ptr of first node to flp > set flp to first node's index)
+> traverse list, checking if current node has target val, use prevNode to track the ptr of the previous node
+> if nodePtr = -1, target node isnt found
+> else target node is found ( prevNode ptr is set to (node at nodePtr)'s pointer > set node at nodePtr's ptr to flp > set flp to nodePtr)
+
+"""
 class Node:
     def __init__(self, data):
         self.data = data
