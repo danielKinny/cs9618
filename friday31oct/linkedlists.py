@@ -9,8 +9,15 @@ def initialiseNodes():
         nodes.append(Node("-"))
         nodes[i].ptr = i+1
     
-    nodes[-1].ptr = -1
+    nodes[-1].ptr = -1 #makes sure last node of the free list is null
     return nodes
+
+def validateAlphabet():
+    valid = False
+    while not valid:
+        data = input('Enter Input (A-Z): ')
+        valid = ord(data) >= 65 and ord(data) <= 90 #uses ASCII to validate input
+    return data
     
 def printNodes(nodes,flp,sp):
     print()
@@ -58,29 +65,30 @@ def insertNode(nodes,flp,sp,val):
     return(nextflp,sp,nodes)
 
 def deleteNode(nodes,flp,sp,tar):
-    nodePtr = sp
+
+    nodePtr = sp #pointer used to traverse will start at sp
     
-    if sp == -1:
+    if sp == -1: #list is empty if sp = -1
         print("There are no nodes to be deleted")
         return nodes,flp,sp
     
-    if nodes[nodePtr].data == tar:
-        nextsp = nodes[nodePtr].ptr
-        nodes[nodePtr].ptr = flp
-        flp = nodePtr
+    if nodes[nodePtr].data == tar: # if first node is target node, avoid accidental ref of prevNode
+        nextsp = nodes[nodePtr].ptr #temp var to store new sp
+        nodes[nodePtr].ptr = flp #node to be deleted now joins free list and points to previous flp
+        flp = nodePtr #updating flp to point to newly delted node
         return nodes,flp,nextsp
     
-    while nodes[nodePtr].data != tar and nodePtr != -1:
-        prevNode = nodePtr
+    while nodes[nodePtr].data != tar and nodePtr != -1: #ensure using nodePtr instead of newNode
+        prevNode = nodePtr #prevnode is a temp var
         nodePtr = nodes[nodePtr].ptr
-    if nodePtr == -1:
+    if nodePtr == -1: #target node not found
         print("Node to be deleted not found")
         return nodes,flp,sp
     else:
-        nextNode = nodes[nodePtr].ptr
-        nodes[nodePtr].ptr = flp
-        flp = nodePtr
-        nodes[prevNode].ptr = nextNode
+        nextNode = nodes[nodePtr].ptr #temp var to store next node
+        nodes[nodePtr].ptr = flp # node to be deleted joins fl
+        flp = nodePtr # flp is now index of deleted node
+        nodes[prevNode].ptr = nextNode # previous node now points to the next node
     
     return nodes,flp,sp
         
@@ -104,17 +112,11 @@ def displayMenu():
             if flp == -1: #checks if there is any more free nodes
                 print("No more space left in list")
             else:
-                valid = False
-                while not valid:
-                    data = input('Enter Input (A-Z): ')
-                    valid = ord(data) >= 65 and ord(data) <= 90 #checks whether input is caps alphabets
+                data = validateAlphabet()
                 flp,sp,nodes = insertNode(nodes,flp,sp,data)
                 printNodes(nodes,flp,sp)
         elif val == 3:
-            valid = False
-            while not valid:
-                data = input('Enter Input (A-Z): ')
-                valid = ord(data) >= 65 and ord(data) <= 90
+            data = validateAlphabet()
             nodes,flp,sp = deleteNode(nodes,flp,sp,data)
             printNodes(nodes,flp,sp)
         else:
