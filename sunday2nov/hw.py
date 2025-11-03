@@ -47,9 +47,27 @@ def InOrder(arr, rp):
     print(arr[rp][1])
     if arr[rp][2] != -1:
         InOrder(arr, arr[rp][2])
-    print()
+
+def PreOrder(arr, rp):
+    print(arr[rp][1])
+    if arr[rp][0] != -1:
+        PreOrder(arr, arr[rp][0])
+    if arr[rp][2] != -1:
+        PreOrder(arr, arr[rp][2])
+
+def PostOrder(arr, rp):
+    if arr[rp][0] != -1:
+        PostOrder(arr, arr[rp][0])
+    if arr[rp][2] != -1:
+        PostOrder(arr, arr[rp][2])
+    print(arr[rp][1])
+
 
 for i in range(10):
     ArrayNodes, RootPointer, FreeNode = AddNode(ArrayNodes, RootPointer, FreeNode)
-PrintAll(ArrayNodes)
-InOrder(ArrayNodes, RootPointer) 
+
+InOrder(ArrayNodes, RootPointer)
+print()
+PreOrder(ArrayNodes, RootPointer)
+print()
+PostOrder(ArrayNodes, RootPointer)
